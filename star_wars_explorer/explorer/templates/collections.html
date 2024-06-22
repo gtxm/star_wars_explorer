@@ -14,7 +14,7 @@
     <tbody>
     {% for collection in collections %}
         <tr>
-            <td>{{ collection.created }}</td>
+            <td><a href="/details/{{ collection.id }}/">{{ collection.created }}</a></td>
         </tr>
     {% endfor %}
     </tbody>

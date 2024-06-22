@@ -1,0 +1,24 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1>Collection {{ collection.pk }}</h1>
+
+<table class="table">
+    <thead>
+    <tr>
+        {% for header in headers %}
+        <th>{{ header }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            {% for col in row %}
+                <td>{{ col }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
