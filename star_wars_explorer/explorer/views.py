@@ -8,6 +8,9 @@ from data_collector.utils import fetch_latest_dataset
 from explorer.utils import compute_selected_fields_after_clicking_field_button
 
 
+# TODO test logic in views
+
+
 def home(request):
     return render(
         request,
