@@ -6,7 +6,7 @@ from data_collector.utils import fetch_latest_dataset
 
 
 def home(request):
-    return render(request, "index.html", {"collections": StarWarsDataCollection.objects.all()})
+    return render(request, "index.html", {"collections": StarWarsDataCollection.objects.order_by("-created").all()})
 
 
 def fetch(request):
