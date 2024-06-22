@@ -24,3 +24,15 @@ def transform_collected_data(data: petl.Table, planet_resource_uri_to_name: dict
         .convert("homeworld", lambda v: planet_resource_uri_to_name[v])
         .cutout("films", "species", "vehicles", "starships", "url", "created", "edited")
     )
+
+
+def fetch_latest_dataset():
+    client = StarWarsAPIClient()
+    planet_resource_uri_to_name = {
+        planet["url"]: planet["name"] for planet in client.get_planets()
+    }  # resolving planet names could be cached / moved into a separate service
+    return save_star_wars_data(
+        transform_collected_data(
+            petl.fromdicts(client.get_people()), planet_resource_uri_to_name
+        )
+    )
