@@ -3,5 +3,5 @@
 - setup new virtualenv
 - install poetry
 - run `poetry install`
-- go to `star_wars_explorer` folder and run `python manage.py runserver`
+- go to `star_wars_explorer` folder and run `python manage.py migrate` then `python manage.py runserver`
 
