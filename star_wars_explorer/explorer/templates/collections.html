@@ -1,0 +1,22 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1>Collections</h1>
+<form action="/fetch" method="POST">
+    <button class="btn btn-primary" type="submit">Fetch</button>
+    {% csrf_token %}</form>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for collection in collections %}
+        <tr>
+            <td>{{ collection.created }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
