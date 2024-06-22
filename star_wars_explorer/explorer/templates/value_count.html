@@ -1,0 +1,34 @@
+{% extends "index.html" %}
+
+{% block content %}
+<h1>{{ collection.filename }}</h1>
+
+<div class="btn-group" role="group" aria-label="Basic example">
+  {% for option in possible_options %}
+      {% if option.fields_for_button %}
+  <a href="/value_count/{{ collection.pk }}/?fields={{ option.fields_for_button }}" class="btn {% if option.selected %}btn-primary{% else %}btn-secondary{% endif %}">{{ option.value }}</a>
+      {% else %}
+      <button class="btn {% if option.selected %}btn-primary{% else %}btn-secondary{% endif %}" disabled>{{ option.value }}</button>
+      {% endif %}
+  {% endfor %}
+</div>
+
+<table class="table">
+    <thead>
+    <tr>
+        {% for header in headers %}
+        <th>{{ header }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+        <tr>
+            {% for col in row %}
+                <td>{{ col }}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
