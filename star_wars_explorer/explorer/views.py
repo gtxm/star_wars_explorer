@@ -20,12 +20,18 @@ def fetch(request):
 
 
 def details(request, pk):
+    current_page = int(request.GET.get("page", 1))
     collection = get_object_or_404(StarWarsDataCollection, pk=pk)
     table = collection.open_data().head(
-        settings.EXPLORER_ROWS_PER_PAGE
+        current_page * settings.EXPLORER_ROWS_PER_PAGE
     )  # TODO handle missing file
     return render(
         request,
         "details.html",
-        {"headers": table.header(), "rows": table.data(), "collection": collection},
-    )
+        {
+            "headers": table.header(),
+            "rows": table.data(),
+            "collection": collection,
+            "next_page": current_page + 1,
+        },
+    )  # TODO handle case when there is no more data to load
