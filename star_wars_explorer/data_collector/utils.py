@@ -18,7 +18,9 @@ def save_star_wars_data(data: petl.Table):
     return collection
 
 
-def transform_collected_data(data: petl.Table):
-    return data.addfield("date", lambda rec: rec["edited"][:10]).cutout(
-        "films", "species", "vehicles", "starships", "url", "created", "edited"
+def transform_collected_data(data: petl.Table, planet_resource_uri_to_name: dict):
+    return (
+        data.addfield("date", lambda rec: rec["edited"][:10])
+        .convert("homeworld", lambda v: planet_resource_uri_to_name[v])
+        .cutout("films", "species", "vehicles", "starships", "url", "created", "edited")
     )

@@ -41,6 +41,7 @@ def test_save_star_wars_data():
 
 
 def test_transform_collected_data():
+    planet_resource_uri_to_name = {"https://swapi.dev/api/planets/1/": "Tatooine"}
     data = petl.fromdicts(
         [
             {
@@ -74,7 +75,7 @@ def test_transform_collected_data():
             }
         ]
     )
-    transformed_data = transform_collected_data(data)
+    transformed_data = transform_collected_data(data, planet_resource_uri_to_name)
     assert transformed_data.header() == (
         "name",
         "height",
@@ -87,3 +88,6 @@ def test_transform_collected_data():
         "homeworld",
         "date",
     )
+    assert list(transformed_data.values("homeworld")) == [
+        "Tatooine",
+    ]
