@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -20,7 +21,9 @@ def fetch(request):
 
 def details(request, pk):
     collection = get_object_or_404(StarWarsDataCollection, pk=pk)
-    table = collection.open_data().head(10)  # TODO handle missing file
+    table = collection.open_data().head(
+        settings.EXPLORER_ROWS_PER_PAGE
+    )  # TODO handle missing file
     return render(
         request,
         "details.html",

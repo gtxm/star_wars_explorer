@@ -124,6 +124,10 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Explorer settings
+
+EXPLORER_ROWS_PER_PAGE = 10
+
 # Data collector specific settings
 DATA_COLLECTOR_BASE_DIR = "/tmp"
 DATA_COLLECTOR_API_BASE_URL = "https://swapi.dev/"
