@@ -3,3 +3,4 @@
 .git
 __pycache__
 .pyc
+star_wars_explorer/db.sqlite3
