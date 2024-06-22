@@ -20,7 +20,7 @@ def fetch(request):
 
 def details(request, pk):
     collection = get_object_or_404(StarWarsDataCollection, pk=pk)
-    table = collection.open_data().head(10)
+    table = collection.open_data().head(10)  # TODO handle missing file
     return render(
         request,
         "details.html",
