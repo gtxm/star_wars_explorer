@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import petl
 from django.conf import settings
 from django.db import models
@@ -14,3 +16,10 @@ class StarWarsDataCollection(models.Model):
 
     def save_data(self, data: petl.Table):
         data.tocsv(self.full_path)
+
+    def open_data(self) -> petl.Table:
+        return petl.fromcsv(self.full_path)
+
+    def delete_file(self):
+        # TODO could be included in a delete signal
+        Path(self.full_path).unlink()

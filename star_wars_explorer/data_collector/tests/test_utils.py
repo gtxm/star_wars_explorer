@@ -39,7 +39,7 @@ def test_save_star_wars_data():
     ]
 
     # cleanup
-    Path(collection.full_path).unlink()
+    collection.delete_file()
 
 
 def test_transform_collected_data():
@@ -167,7 +167,7 @@ def test_fetch_latest_dataset():
     with patch("data_collector.utils.StarWarsAPIClient", return_value=mock_client):
         collection = fetch_latest_dataset()
 
-    assert list(petl.fromcsv(collection.full_path).dicts()) == [
+    assert list(collection.open_data().dicts()) == [
         {
             "name": "Luke Skywalker",
             "height": "172",
@@ -181,3 +181,6 @@ def test_fetch_latest_dataset():
             "date": "2014-12-20",
         }
     ]
+
+    # cleanup
+    collection.delete_file()
